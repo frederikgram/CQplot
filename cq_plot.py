@@ -64,8 +64,7 @@ def get_last_modification_date(file_path: str) -> datetime:
     :return: datetime object of last modification date
     """
     last_modified_epoch = os.path.getmtime(os.path.join(file_path))
-    last_modified_datetime = datetime.fromtimestamp(last_modified_epoch)
-    return last_modified_datetime
+    return datetime.fromtimestamp(last_modified_epoch)
 
 
 if __name__ == "__main__":
@@ -78,6 +77,8 @@ if __name__ == "__main__":
     except IndexError:
         ROOT_PATH = '.'
 
+    QUALITY_MAP = dict()
+
     for path, name in find_files(ROOT_PATH):
         full_path = os.path.join(path, name)
         quality = lint_file(full_path)
@@ -86,12 +87,11 @@ if __name__ == "__main__":
         plt.scatter(last_modified, quality, c=[[0, 0, 0]])
 
         # for extra data
-        quality_map = dict()
-        quality_map[full_path] = (last_modified, quality)
+        QUALITY_MAP[full_path] = (last_modified, quality)
 
     # Show average score
     print("Average score: ",
-          sum([quality_map[key][1] for key in quality_map]) / len(quality_map))
+          sum([QUALITY_MAP[key][1] for key in QUALITY_MAP]) / len(QUALITY_MAP))
 
     plt.xlabel("Datetime of last modification")
     plt.ylabel("pylint score out of 10")
