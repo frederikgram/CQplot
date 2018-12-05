@@ -9,8 +9,6 @@ from pylint import epylint as lint
 STD_BLACKLIST = ['venv']
 STD_PATTERNS = ['.py', '.pyw']
 
-quality_map = {}
-
 
 def find_files(root_path: str, patterns: str=None, blacklist: list=None) -> Iterable[Tuple]:
     if patterns is None:
@@ -61,6 +59,7 @@ if __name__ == "__main__":
         plt.scatter(last_modified, quality, c=[[0, 0, 0]])
 
         # for extra data
+        quality_map = dict()
         quality_map[full_path] = (last_modified, quality)
 
     # Show average score
