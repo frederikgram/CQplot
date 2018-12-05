@@ -65,6 +65,9 @@ if __name__ == "__main__":
     # Show average score
     print("Average score: ", sum([quality_map[key][1] for key in quality_map.keys()]) / len(quality_map))
 
+    plt.xlabel("Datetime of last modification")
+    plt.ylabel("pylint score out of 10")
     plt.xticks(rotation=-45)
+    plt.ylim([0, 10])
     plt.show()
 
