@@ -54,7 +54,7 @@ def lint_file(file_path: str) -> float:
         return float(pylint_score)
 
     # Print error if no score is found
-    print(list(stderr))
+    print(list(stderr) or "Could not lint {0}".format(file_path))
 
 
 def get_last_modification_date(file_path: str) -> datetime:
